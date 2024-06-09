@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.duongnv.recorder.flutter_recorder.record.RecorderVisualizer
+            android:id="@+id/visualizer"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_224dp_h"
+            android:layout_gravity="center"
+            app:backgroundBarPrimeColor="@color/gray"
+            app:barWidth="1dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadedBarPrimeColor="@color/colorPrimary"
+            app:maxAmp="100"
+            app:spaceBetweenBar="2dp" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.3"
+        android:background="@color/color_F7F8F9"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_record_state"
+            style="@style/text_4C4C4C_14_w400"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_30dp_h"
+            android:text="@string/txt_tap_to_start_record" />
+
+
+        <FrameLayout
+            android:layout_width="@dimen/dimen_100dp_h"
+            android:layout_height="@dimen/dimen_100dp_h"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_22dp_h">
+
+            <ImageView
+                android:id="@+id/answerAnimation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_circle_overlay"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/answerAnimation1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_circle_overlay"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/answerAnimation2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_circle_overlay"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/answerAnimation3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_circle_overlay"
+                android:visibility="invisible" />
+
+
+            <ImageView
+                android:id="@+id/btn_stop_record"
+                android:layout_width="@dimen/dimen_60dp_h"
+                android:layout_height="@dimen/dimen_60dp_h"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_img_camera"
+                android:padding="@dimen/dimen_20dp_h"
+                android:src="@drawable/ic_pause"
+                android:visibility="visible"
+                app:tint="@color/white" />
+
+            <ImageView
+                android:id="@+id/btn_record"
+                android:layout_width="@dimen/dimen_60dp_h"
+                android:layout_height="@dimen/dimen_60dp_h"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_img_camera"
+                android:padding="@dimen/dimen_15dp_h"
+                android:src="@drawable/ic_play"
+                app:tint="@color/white" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_timer"
+            style="@style/text_323232_20_w700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_16dp_h"
+            android:layout_marginBottom="@dimen/dimen_32dp_h"
+            android:text="00:00" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/save_controller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/btn_cancel"
+                android:layout_width="@dimen/dimen_48dp_h"
+                android:layout_height="@dimen/dimen_48dp_h"
+                android:background="@drawable/bg_cancel_record"
+                android:src="@drawable/ic_clear"
+                app:layout_constraintEnd_toStartOf="@id/btn_save"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                style="@style/text_323232_14_w500"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8dp_h"
+                android:text="@string/txt_cancel"
+                app:layout_constraintEnd_toEndOf="@id/btn_cancel"
+                app:layout_constraintStart_toStartOf="@id/btn_cancel"
+                app:layout_constraintTop_toBottomOf="@id/btn_cancel" />
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="@dimen/dimen_48dp_h"
+                android:layout_height="@dimen/dimen_48dp_h"
+                android:background="@drawable/bg_save_record_audio"
+                android:enabled="false"
+                android:src="@drawable/ic_check"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_cancel"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/white" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_check"
+                android:translationZ="100dp"
+                app:layout_constraintBottom_toBottomOf="@id/btn_save"
+                app:layout_constraintEnd_toEndOf="@id/btn_save"
+                app:layout_constraintStart_toStartOf="@id/btn_save"
+                app:layout_constraintTop_toTopOf="@id/btn_save" />
+
+            <TextView
+                android:id="@+id/tv_save"
+                style="@style/text_1094DF_14_w500"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8dp_h"
+                android:enabled="false"
+                android:text="@string/txt_save"
+                android:textColor="@color/color_save_record_file"
+                app:layout_constraintEnd_toEndOf="@id/btn_save"
+                app:layout_constraintStart_toStartOf="@id/btn_save"
+                app:layout_constraintTop_toBottomOf="@id/btn_save" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="2dp"
+            android:background="#222121" />
+
+    </LinearLayout>
+</LinearLayout>

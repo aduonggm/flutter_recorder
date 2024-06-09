@@ -2,7 +2,7 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'flutter_recorder_method_channel.dart';
 
-abstract class FlutterRecorderPlatform extends PlatformInterface {
+abstract class FlutterRecorderPlatform extends PlatformInterface with IRecord {
   /// Constructs a FlutterRecorderPlatform.
   FlutterRecorderPlatform() : super(token: _token);
 
@@ -24,6 +24,7 @@ abstract class FlutterRecorderPlatform extends PlatformInterface {
   }
 
   Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
+    return _instance.getPlatformVersion();
   }
+
 }
