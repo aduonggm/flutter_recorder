@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.FilesFragment">
+
+    <com.duongnv.fakecall.component.HeaderComponent
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:centerTitle="true"
+        android:text="@string/txt_add_voice"
+        app:headerLeftIcon="@drawable/ic_arrow_back"
+        app:headerRightIcon="@drawable/ic_check"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.mangaverse.ads.manager.NativeGroupView
+        android:id="@+id/native_view"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="@dimen/dimen_16dp_h"
+        app:layout_constraintTop_toBottomOf="@id/header" />
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/txt_empty"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_file_picked"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dimen_10dp_h"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/banner"
+        app:layout_constraintTop_toBottomOf="@id/native_view"
+        tools:itemCount="20"
+        tools:listitem="@layout/item_record_file" />
+
+    <com.mangaverse.ads.manager.BannerView
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--        android:id="@+id/btn_add_record"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginEnd="@dimen/dimen_30dp_h"-->
+    <!--        android:layout_marginBottom="@dimen/dimen_30dp_h"-->
+    <!--        android:backgroundTint="@color/colorPrimary"-->
+    <!--        android:src="@drawable/ic_add"-->
+    <!--        android:visibility="gone"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent" />-->
+</androidx.constraintlayout.widget.ConstraintLayout>

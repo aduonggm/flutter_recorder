@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="colorOnSurface">#b7dbec</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="grey">#9E9E9E</color>
+
+    <color name="colorSecondary">#ff4081</color>
+    <color name="colorPrimary">#1094DF</color>
+    <color name="colorPrimary_40">#E61094DF</color>
+    <color name="color_1094DF">#1094DF</color>
+    <color name="colorAccent">#09bf8d</color>
+    <color name="colorPrimaryDark">#32193DF1</color>
+    <color name="cardview_oneui_3_background_color">#ccffffff</color>
+    <color name="test">#e37a98</color>
+    <color name="light_blue_A400">#ff00b0ff</color>
+    <color name="samsung_s20_end_color">#2048ad</color>
+    <color name="white_with_alpha">#aaffffff</color>
+    <color name="green">#1D800B</color>
+    <color name="red">#FF0000</color>
+    <color name="color_001921_20_percent">#33001F29</color>
+    <color name="color_bg_video">#F8C2FF</color>
+    <color name="color_bg_video_outline">#45F7E3FF</color>
+
+    <color name="color_bg_phone">#9DDCFF</color>
+    <color name="color_bg_phone_outline">#1A9DDCFF</color>
+
+
+    <color name="color_bg_audio">#8FFFF6A7</color>
+    <color name="color_bg_audio_outline">#F3BD56</color>
+
+
+    <color name="color_background_chip">#ffffff</color>
+    <color name="color_decline">#ff0000</color>
+    <color name="color_accept">#27c515</color>
+    <color name="color_1A92D6_30">#4D1A92D6</color>
+    <color name="color_1E9EEA_5">#0D1E9EEA</color>
+    <color name="color_4C4C4C">#4C4C4C</color>
+    <color name="color_7F7F7F">#7F7F7F</color>
+    <color name="color_1094DF_20">#331094DF</color>
+    <color name="color_DADADA">#DADADA</color>
+    <color name="color_F7F8F9">#F7F8F9</color>
+    <color name="color_A6DDFC">#A6DDFC</color>
+    <color name="color_d6d6d6">#D6D6D6</color>
+    <color name="color_323232">#323232</color>
+    <color name="color_232326">#232326</color>
+    <color name="color_E6E4EA">#E6E4EA</color>
+    <color name="color_9A99A2">#9A99A2</color>
+
+    <color name="progress_gray">#FFD8D8D8</color>
+    <color name="progress_gray_dark">#FF383838</color>
+    <color name="default_blue_light">#ff33b5e5</color>
+
+    <color name="color_EB5757">#EB5757</color>
+    <color name="color_E0F1FF">#E0F1FF</color>
+    <color name="color_2F3137">#3E2F3137</color>
+    <color name="color_212226">#212226</color>
+    <color name="color_407BFF">#407BFF</color>
+    <color name="color_D9D9D9">#D9D9D9</color>
+</resources>
