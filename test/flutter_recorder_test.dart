@@ -10,6 +10,16 @@ class MockFlutterRecorderPlatform
 
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
+
+  @override
+  void registerCallback(Function() onCancel, Function(String filePath) onSave, Function() onRequestPermission) {
+    // TODO: implement registerCallback
+  }
+
+  @override
+  void unregisterCallback() {
+    // TODO: implement unregisterCallback
+  }
 }
 
 void main() {

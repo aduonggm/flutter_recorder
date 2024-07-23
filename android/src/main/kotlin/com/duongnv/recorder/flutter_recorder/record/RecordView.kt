@@ -4,12 +4,12 @@ import android.Manifest
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import com.duongnv.recorder.flutter_recorder.R
@@ -17,7 +17,12 @@ import com.duongnv.recorder.flutter_recorder.databinding.FragmentRecordingBindin
 import io.flutter.plugin.platform.PlatformView
 import java.util.concurrent.TimeUnit
 
-class RecordView(context: Context?, private val callback: Callback) :
+@SuppressLint("ViewConstructor")
+class RecordView(
+    context: Context?,
+    private val callback: Callback,
+    private val textModel: TextModel
+) :
     LinearLayout(context), PlatformView {
 
     private val binding: FragmentRecordingBinding =
@@ -33,21 +38,14 @@ class RecordView(context: Context?, private val callback: Callback) :
 
     }
 
-
-//    private val recordLauncher =
-//        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-//            setRequestPermission(false)
-//            if (isGranted) {
-//                AnalyticEvent.track("accepted_record_permission")
-//                startRecording()
-//            }
-//        }
-
     private lateinit var recorder: Recorder
 
     private val animations = arrayListOf<AnimatorSet>()
     private var isCancel = false
     private fun initView() {
+        binding.tvCancel.text = textModel.cancel
+        binding.tvSave.text = textModel.save
+        binding.tvRecordState.text = textModel.touchToStart
 
         binding.btnRecord.setOnClickListener { record() }
         binding.btnStopRecord.setOnClickListener {
@@ -77,34 +75,35 @@ class RecordView(context: Context?, private val callback: Callback) :
     private fun listenOnRecorderStates() = with(binding) {
         recorder = Recorder.getInstance(context).init().apply {
             onRecording = {
-                binding.tvRecordState.text = context.getString(R.string.txt_tap_to_pause_recording)
+                binding.tvRecordState.text = textModel.tapToPause
+//                binding.tvRecordState.text = context.getString(R.string.txt_tap_to_pause_recording)
                 binding.btnRecord.visible = false
                 binding.btnStopRecord.visible = true
                 binding.btnSave.isEnabled = true
                 binding.tvSave.isEnabled = true
-                binding.tvCancel.text = context.getString(R.string.txt_delete)
+                binding.tvCancel.text = textModel.delete
                 binding.btnRecord.setImageResource(R.drawable.ic_play)
                 startWave()
             }
             onPause = {
                 stopWave()
-                binding.tvRecordState.text = context.getString(R.string.txt_tap_to_resume)
+                binding.tvRecordState.text = textModel.tapToResume
                 binding.btnSave.isEnabled = true
                 binding.btnRecord.visible = true
                 binding.btnStopRecord.visible = false
-                binding.tvCancel.text = context.getString(R.string.txt_delete)
+                binding.tvCancel.text = textModel.delete
 
             }
             onStop = { filePath ->
                 stopWave()
                 binding.btnRecord.setImageResource(R.drawable.ic_mic)
                 binding.btnSave.isEnabled = false
-                binding.tvRecordState.text = context.getString(R.string.txt_tap_to_start_record)
+                binding.tvRecordState.text = textModel.touchToStart
                 visualizer.clear()
                 binding.btnRecord.visible = true
                 binding.btnStopRecord.visible = false
                 binding.tvTimer.text = 0L.formatAsTime()
-                binding.tvCancel.text = context.getString(R.string.txt_cancel)
+                binding.tvCancel.text = textModel.cancel
                 Logger.d("===========>>>>>>>>. on stop record $filePath   $isCancel")
                 if (filePath.isNotEmpty() && !isCancel) {
                     callback.onSave(filePath)
@@ -142,15 +141,15 @@ class RecordView(context: Context?, private val callback: Callback) :
         }
 
     private fun startWave() {
-        animations.add(startAnimation(binding.answerAnimation, 2400L))
+        animations.add(startAnimationWave(binding.answerAnimation))
         postDelayed({
-            animations.add(startAnimation(binding.answerAnimation1, 2400L))
+            animations.add(startAnimationWave(binding.answerAnimation1))
         }, 600)
         postDelayed({
-            animations.add(startAnimation(binding.answerAnimation2, 2400L))
+            animations.add(startAnimationWave(binding.answerAnimation2))
         }, 1200)
         postDelayed({
-            animations.add(startAnimation(binding.answerAnimation3, 2400L))
+            animations.add(startAnimationWave(binding.answerAnimation3))
         }, 1800)
     }
 
@@ -158,6 +157,7 @@ class RecordView(context: Context?, private val callback: Callback) :
         recorder.startRecord()
     }
 
+    @SuppressLint("DefaultLocale")
     private fun Long.formatAsTime(): String {
         val seconds = (TimeUnit.MILLISECONDS.toSeconds(this) % 60).toInt()
         val minutes = (TimeUnit.MILLISECONDS.toMinutes(this) % 60).toInt()
@@ -183,7 +183,7 @@ class RecordView(context: Context?, private val callback: Callback) :
         return (result == PackageManager.PERMISSION_GRANTED)
     }
 
-    private fun startAnimation(view: View, duration: Long): AnimatorSet {
+    private fun startAnimationWave(view: View, duration: Long = 2400L): AnimatorSet {
         view.isVisible = true
         val alpha =
             ObjectAnimator.ofFloat(view, "alpha", 0.0f, 1.0f, 1.0f, 0.0f).setDuration(duration)
@@ -205,5 +205,30 @@ class RecordView(context: Context?, private val callback: Callback) :
         fun onCancel()
         fun onSave(path: String)
         fun onRequestPermission()
+    }
+}
+
+
+data class TextModel(
+    val touchToStart: String,
+    val cancel: String,
+    val save: String,
+    val tapToPause: String,
+    val delete: String,
+    val tapToResume: String
+) {
+
+    companion object {
+
+        fun fromJson(json: Map<String, String>): TextModel {
+            return TextModel(
+                touchToStart = json["touchToStart"]!!,
+                cancel = json["cancel"]!!,
+                save = json["save"]!!,
+                tapToPause = json["tapToPause"]!!,
+                delete = json["delete"]!!,
+                tapToResume = json["tapToResume"]!!
+            )
+        }
     }
 }
