@@ -11,4 +11,5 @@ class NativeViewFactory(private val callback: RecordView.Callback) :
         val creationParams = args as Map<String, String>
         return RecordView(context, callback, TextModel.fromJson(creationParams))
     }
+
 }

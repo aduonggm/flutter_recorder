@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_recorder/flutter_recorder.dart';
 import 'package:flutter_recorder/record_view.dart';
@@ -49,26 +49,53 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Center(
-          child: RecordView(
-            onSave: (filePath) {
-              print("========>>>>>>>>> on save ");
+    return const MaterialApp(home: Home());
+  }
+}
 
-            },
-            onRequestPermission: () {
-              print("========>>>>>>>>> on onRequestPermission ");
+class RecordScreen extends StatefulWidget {
+  const RecordScreen({super.key});
 
-            },
-            onCancel: () {
-              print("========>>>>>>>>> on cancel ");
-            },
-          ),
+  @override
+  State<RecordScreen> createState() => _RecordScreenState();
+}
+
+class _RecordScreenState extends State<RecordScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Plugin example app'),
+      ),
+      body: Center(
+        child: RecordView(
+          onSave: (filePath) {
+            print("========>>>>>>>>> on save ");
+          },
+          onRequestPermission: () {
+            print("========>>>>>>>>> on onRequestPermission ");
+          },
+          onCancel: () {
+            print("========>>>>>>>>> on cancel ");
+          },
         ),
+      ),
+    );
+  }
+}
+
+class Home extends StatelessWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: TextButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RecordScreen()));
+            },
+            child: const Text('next')),
       ),
     );
   }

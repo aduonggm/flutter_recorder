@@ -41,7 +41,11 @@ class RecordView(
     private lateinit var recorder: Recorder
 
     private val animations = arrayListOf<AnimatorSet>()
-    private var isCancel = false
+
+    companion object {
+        var isCancel = false
+    }
+
     private fun initView() {
         binding.tvCancel.text = textModel.cancel
         binding.tvSave.text = textModel.save
@@ -118,6 +122,7 @@ class RecordView(
                 }
             }
         }
+        callback.onCreateRecorder(recorder)
     }
 
     private fun stopWave() {
@@ -205,6 +210,7 @@ class RecordView(
         fun onCancel()
         fun onSave(path: String)
         fun onRequestPermission()
+        fun onCreateRecorder(recorder: Recorder)
     }
 }
 

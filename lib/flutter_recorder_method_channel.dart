@@ -10,7 +10,7 @@ abstract mixin class IRecord {
 }
 
 /// An implementation of [FlutterRecorderPlatform] that uses method channels.
-class MethodChannelFlutterRecorder extends FlutterRecorderPlatform  {
+class MethodChannelFlutterRecorder extends FlutterRecorderPlatform {
   MethodChannelFlutterRecorder() {
     _registerCallback();
   }
@@ -33,7 +33,7 @@ class MethodChannelFlutterRecorder extends FlutterRecorderPlatform  {
     methodChannel.setMethodCallHandler((call) async {
       switch (call.method) {
         case "onCancel":
-          print('==========>>>>>>>>> on cancel in flutter  ${onCancel == null }');
+          print('==========>>>>>>>>> on cancel in flutter  ${onCancel == null}');
           if (onCancel != null) {
             onCancel!();
           }
@@ -55,7 +55,6 @@ class MethodChannelFlutterRecorder extends FlutterRecorderPlatform  {
     });
   }
 
-
   @override
   void registerCallback(Function() onCancel, Function(String filePath) onSave, Function() onRequestPermission) {
     this.onSave = onSave;
@@ -68,5 +67,6 @@ class MethodChannelFlutterRecorder extends FlutterRecorderPlatform  {
     onRequestPermission = null;
     onSave = null;
     onCancel = null;
+    methodChannel.invokeMethod("dispose");
   }
 }
