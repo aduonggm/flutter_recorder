@@ -47,6 +47,7 @@ class Recorder private constructor(context: Context) {
                 RecorderState.RECORDING -> onRecording?.invoke()
                 RecorderState.STOP -> onStop?.invoke(filePath)
                 RecorderState.PAUSE -> onPause?.invoke()
+                else -> {}
             }
         }
         return this
